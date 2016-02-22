@@ -79,7 +79,6 @@ const throwif = require('throwif');
 throwif('str', '!==', 'bar');
 //=> Error: "foo" !== "bar"
 
-
 throwif(42, '===', 42);
 //=> Error: 42 === 42
 
