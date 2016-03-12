@@ -1,6 +1,6 @@
 {
   "name": "throwif",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Super-compact syntax for your type checking and throw statements.",
   "license": "MIT",
   "repository": "radiovisual/throwif",
