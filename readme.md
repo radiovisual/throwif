@@ -4,7 +4,8 @@
 
 [![Build Status](https://travis-ci.org/radiovisual/throwif.svg?branch=master)](https://travis-ci.org/radiovisual/throwif) [![Coverage Status](https://coveralls.io/repos/github/radiovisual/throwif/badge.svg?branch=master)](https://coveralls.io/github/radiovisual/throwif?branch=master)
  
-**Note:** This is currently in the beginning/experimental phases. Please [report any issues](https://github.com/radiovisual/throwif/issues) and use with caution. Pull requests welcome.
+**Note:** This is currently in the experimental phase. Please [report any issues](https://github.com/radiovisual/throwif/issues) and use with caution. Pull requests welcome.
+
 
 ## Install
 
@@ -44,21 +45,57 @@ throwif(str, '!== string');
 Both blocks of code do the exact same thing (they throw the exact same error, if applicable), but throwif does the same with less code, while maintaining readability.
 
 
-## API
+## API  
 
-### throwif(target, equalityOperator|typeofString, [object]);
+### throwif(target, equalityOperator|typeofString, [object]);  
 
-#### target
+#### target  
 
-Type: `string|number|object|function|symbol`
+Type: `string|number|object|function|symbol`  
 
 This is the item you want to evaluate for type, equality, etc.
 
-#### equalityOperator
+#### typeofString  
+
+Type: `String`  
+Format: `<equality-operator> <type>`  
+
+Use this as a shorthand for the `typeof` operator.  
+
+#### `typeof` Examples  
+
+```js
+const throwif = require('throwif');
+
+const str = 'foo';
+
+// Not Equal
+throwif(str, '!== string');
+throwif(str, '!== function');
+throwif(str, '!== number');
+throwif(str, '!== object');
+throwif(str, '!== symbol');
+throwif(str, '!== boolean');
+throwif(str, '!== undefined');
+
+// Equal
+throwif(str, '=== string');
+throwif(str, '=== function');
+throwif(str, '=== number');
+throwif(str, '=== object');
+throwif(str, '=== symbol');
+throwif(str, '=== boolean');
+throwif(str, '=== undefined');
+```
+
+
+#### equalityOperator  
 
 Type: `string`  
 
-The string version of the equality operator want to use for your rule. You can show negation by prepending an exclamation point, which is not possible with certain comparison operators in JavaScript, but throwif makes this shortcut available on all comparison and equality operators. Only use operator strings when you want to check equality and comparison, for `typeof` operations (to check if an item is a certain type), use [typeofStr](https://github.com/radiovisual/throwif#typeofStr). 
+The string version of the equality operator want to use for your rule. 
+
+You can show negation with a prepended exclamation point, which is not possible with certain comparison operators in JavaScript, but throwif makes this shortcut available on *all comparison and equality operators*. Only use operator strings when you want to check equality and comparison, for `typeof` operations (to check if an item is a certain type), use [typeofString](https://github.com/radiovisual/throwif#typeofString). 
 
 - `'==='`
 - `'!=='`
@@ -71,12 +108,12 @@ The string version of the equality operator want to use for your rule. You can s
 - `'<='`
 - `'!<='`
 
-#### Equality Examples
+#### Equality Examples  
 
 ```js
 const throwif = require('throwif');
 
-throwif('str', '!==', 'bar');
+throwif('foo', '!==', 'bar');
 //=> Error: "foo" !== "bar"
 
 throwif(42, '===', 42);
@@ -89,40 +126,7 @@ throwif(100, '!<=', 99);
 //=> Error: 100 !<= 99
 ```
 
-#### typeofString
-
-Type: `String`  
-Format: `<equality-operator> <type>`  
-
-Use this as a shorthand for the `typeof` operator.
-
-#### `typeof` Examples
-
-```js
-const throwif = require('throwif');
-
-const str = 'foo';
-
-// Not Equal
-throwif(str, '!=== string');
-throwif(str, '!=== function');
-throwif(str, '!=== number');
-throwif(str, '!=== object');
-throwif(str, '!=== symbol');
-throwif(str, '!=== boolean');
-throwif(str, '!=== undefined');
-
-// Equal
-throwif(str, '=== string');
-throwif(str, '=== function');
-throwif(str, '=== number');
-throwif(str, '=== object');
-throwif(str, '=== symbol');
-throwif(str, '=== boolean');
-throwif(str, '=== undefined');
-```
-
-## Known Limitations
+## Known Limitations  
 
 - You can't use the equality string to check for `undefined`, you must use the `typeofStr`.
     ```js
@@ -135,7 +139,7 @@ throwif(str, '=== undefined');
 
 - To check for equality between `Symbols`, the following cast takes place: `Object(Symbol()).toString();`. If you know of a better way to check equality for Symbols, please open an issue, or submit a pull request. 
 
-## Related
+## Related  
 
 - [detonate](https://github.com/radiovisual/detonate) Go boom! with a clean, compact syntax for your javascript type checking & error throwing.
 
